@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 16:33:57 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/04 21:53:48 by emoreau          ###   ########.fr       */
+/*   Created: 2017/11/12 12:22:16 by emoreau           #+#    #+#             */
+/*   Updated: 2017/11/22 19:47:06 by emoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
-# define BUFF_SIZE 600
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "libft/libft.h"
+#include "libft.h"
 
-typedef struct			s_tab
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	char				tab[4][4];
-	struct s_tab		*next;
-}						t_tab;
+	size_t			i;
+	unsigned char	*d;
+	unsigned char	*s;
 
-char					*ft_read(char **argv);
-
-#endif
+	i = 0;
+	d = (unsigned char *)dst;
+	s = (unsigned char *)((unsigned long)src);
+	while (i < n)
+	{
+		d[i] = s[i];
+		if (s[i] == (unsigned char)c)
+			return (&d[i + 1]);
+		i++;
+	}
+	return (NULL);
+}

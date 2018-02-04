@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 16:33:57 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/04 21:53:48 by emoreau          ###   ########.fr       */
+/*   Created: 2017/11/10 19:56:47 by emoreau           #+#    #+#             */
+/*   Updated: 2017/11/13 20:10:13 by emoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
-# define BUFF_SIZE 600
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "libft/libft.h"
+#include "libft.h"
 
-typedef struct			s_tab
+int	ft_tolower(int c)
 {
-	char				tab[4][4];
-	struct s_tab		*next;
-}						t_tab;
-
-char					*ft_read(char **argv);
-
-#endif
+	if (c >= 65 && c <= 90)
+		return (c + 32);
+	else
+		return (c);
+}

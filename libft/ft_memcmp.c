@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 16:33:57 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/04 21:53:48 by emoreau          ###   ########.fr       */
+/*   Created: 2017/11/13 17:36:20 by emoreau           #+#    #+#             */
+/*   Updated: 2017/11/22 16:02:05 by emoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
-# define BUFF_SIZE 600
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "libft/libft.h"
+#include "libft.h"
 
-typedef struct			s_tab
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char				tab[4][4];
-	struct s_tab		*next;
-}						t_tab;
+	size_t			i;
+	unsigned char	*m1;
+	unsigned char	*m2;
 
-char					*ft_read(char **argv);
-
-#endif
+	m1 = (unsigned char *)s1;
+	m2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (m1[i] != m2[i])
+			return (m1[i] - m2[i]);
+		i++;
+	}
+	return (0);
+}

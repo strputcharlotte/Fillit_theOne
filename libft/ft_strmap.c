@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 16:33:57 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/04 21:53:48 by emoreau          ###   ########.fr       */
+/*   Created: 2017/11/15 16:40:32 by emoreau           #+#    #+#             */
+/*   Updated: 2017/11/17 13:44:21 by emoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
-# define BUFF_SIZE 600
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "libft/libft.h"
+#include "libft.h"
 
-typedef struct			s_tab
+char	*ft_strmap(char const *s, char (*f)(char))
 {
-	char				tab[4][4];
-	struct s_tab		*next;
-}						t_tab;
+	int		i;
+	int		len;
+	char	*dest;
 
-char					*ft_read(char **argv);
-
-#endif
+	if (s)
+	{
+		i = 0;
+		len = 0;
+		while (s[len])
+			len++;
+		if (!(dest = (char*)malloc(sizeof(char) * (len + 1))))
+			return (NULL);
+		while (s[i])
+		{
+			dest[i] = f(s[i]);
+			i++;
+		}
+		dest[i] = '\0';
+		return (dest);
+	}
+	return (NULL);
+}

@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 16:33:57 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/04 21:53:48 by emoreau          ###   ########.fr       */
+/*   Created: 2017/11/10 20:40:24 by emoreau           #+#    #+#             */
+/*   Updated: 2017/11/19 15:01:35 by emoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
-# define BUFF_SIZE 600
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "libft/libft.h"
+#include "libft.h"
 
-typedef struct			s_tab
+void	ft_bzero(void *s, size_t n)
 {
-	char				tab[4][4];
-	struct s_tab		*next;
-}						t_tab;
+	size_t			i;
+	unsigned char	*p;
 
-char					*ft_read(char **argv);
-
-#endif
+	p = (unsigned char*)s;
+	i = 0;
+	while (i < n)
+	{
+		p[i] = '\0';
+		i++;
+	}
+}

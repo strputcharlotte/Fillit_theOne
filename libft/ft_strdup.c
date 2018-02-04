@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 16:33:57 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/04 21:53:48 by emoreau          ###   ########.fr       */
+/*   Created: 2017/11/09 16:37:49 by emoreau           #+#    #+#             */
+/*   Updated: 2017/11/23 18:59:29 by emoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
-# define BUFF_SIZE 600
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "libft/libft.h"
+#include "libft.h"
 
-typedef struct			s_tab
+char	*ft_strdup(const char *s1)
 {
-	char				tab[4][4];
-	struct s_tab		*next;
-}						t_tab;
+	int		i;
+	int		len;
+	char	*dest;
 
-char					*ft_read(char **argv);
-
-#endif
+	i = 0;
+	len = 0;
+	while (s1[len])
+		len++;
+	if (!(dest = (char*)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	while (s1[i])
+	{
+		dest[i] = s1[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}

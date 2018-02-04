@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 16:33:57 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/04 21:53:48 by emoreau          ###   ########.fr       */
+/*   Created: 2017/11/11 12:35:13 by emoreau           #+#    #+#             */
+/*   Updated: 2017/11/21 19:50:00 by emoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
-# define BUFF_SIZE 600
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "libft/libft.h"
+#include "libft.h"
 
-typedef struct			s_tab
+int	ft_atoi(const char *str)
 {
-	char				tab[4][4];
-	struct s_tab		*next;
-}						t_tab;
+	int	i;
+	int	nega;
+	int	resul;
 
-char					*ft_read(char **argv);
-
-#endif
+	i = 0;
+	resul = 0;
+	nega = 1;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == '-')
+		nega = -1;
+	if ((str[i] == '-') || (str[i] == '+'))
+		i++;
+	while (str[i] >= 48 && str[i] <= 57)
+	{
+		resul = resul * 10 + (str[i] - 48);
+		i++;
+	}
+	return (resul * nega);
+}

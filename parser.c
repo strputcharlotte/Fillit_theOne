@@ -6,7 +6,7 @@
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 16:36:56 by emoreau           #+#    #+#             */
-/*   Updated: 2018/01/29 18:27:26 by emoreau          ###   ########.fr       */
+/*   Updated: 2018/02/04 21:53:47 by emoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int			error(char **tab)
 			}
 			else
 				return (-1);
+			if (y > 129)
+				return (-1);
 		}
-		if (y > 129)
-			return (-1);
 		return (-1);
 	}
 	return (0);
@@ -71,7 +71,7 @@ int		comptchar(char **tab)
 			y++;
 			x = 0;
 		}
-		if (tab[4][4])
+		if (tab[3][4]) // = "au moment ou on est a cet endroit, rentre dans la boucle"
 		{
 			if (compt_diese != 4 && compt_point != 12)
 				return (-1);
@@ -80,4 +80,61 @@ int		comptchar(char **tab)
 		}
 	}
 	return (0);
+}
+
+int		separe_tetro(char **tab)
+{
+	int		j;
+	int		y;
+	int 	cpt;
+	t_tab	*new_tetro;
+
+	j = 0;
+	y = 0;
+	cpt = 0;
+	while (tab)
+	{
+		while (*tab[y] != '\n' && j < 4)
+		{
+			ft_strncpy(new_tetro->tab[j], tab[y], 4);
+			y++;
+			j++;
+		}
+		if (j != 0)
+		{
+			cpt++;
+			new_tetro = new_tetro->next;
+		}
+		else
+			y++;
+		j = 0;
+		if (cpt > 26 || cpt == 0)
+			return (-1);
+	}
+	return (0);
+}
+
+char	*ft_convletter(char *str)
+{
+	int i;
+	int compt;
+	char c;
+	i = 0;
+	compt = 0;
+	c = 'A';
+	while (str[i])
+	{
+		if (str[i] == '#')
+		{
+			str[i] = c;
+			compt++;
+		}
+		if(compt == 4)
+		{
+			c++;
+			compt = 0;
+		}
+		i++;
+	}
+	return (str);
 }

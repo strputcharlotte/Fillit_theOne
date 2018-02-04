@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 16:33:57 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/04 21:53:48 by emoreau          ###   ########.fr       */
+/*   Created: 2017/11/13 16:52:20 by emoreau           #+#    #+#             */
+/*   Updated: 2017/11/19 19:49:31 by emoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
-# define BUFF_SIZE 600
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "libft/libft.h"
+#include "libft.h"
 
-typedef struct			s_tab
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	char				tab[4][4];
-	struct s_tab		*next;
-}						t_tab;
+	size_t					i;
+	unsigned char			p;
+	unsigned char			*l;
 
-char					*ft_read(char **argv);
-
-#endif
+	p = (unsigned char)c;
+	l = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		if (l[i] != p)
+			i++;
+		else
+			return (&l[i]);
+	}
+	return (NULL);
+}

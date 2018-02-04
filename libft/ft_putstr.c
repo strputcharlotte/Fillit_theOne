@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 16:33:57 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/04 21:53:48 by emoreau          ###   ########.fr       */
+/*   Created: 2017/11/10 21:00:00 by emoreau           #+#    #+#             */
+/*   Updated: 2017/11/23 18:55:50 by emoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
-# define BUFF_SIZE 600
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "libft/libft.h"
+#include "libft.h"
 
-typedef struct			s_tab
+void	ft_putstr(char const *str)
 {
-	char				tab[4][4];
-	struct s_tab		*next;
-}						t_tab;
+	int i;
 
-char					*ft_read(char **argv);
-
-#endif
+	i = 0;
+	if (str)
+	{
+		while (str[i] != '\0')
+		{
+			ft_putchar(str[i]);
+			i++;
+		}
+	}
+}

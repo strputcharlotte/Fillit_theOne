@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 16:33:57 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/04 21:53:48 by emoreau          ###   ########.fr       */
+/*   Created: 2017/11/15 18:03:22 by emoreau           #+#    #+#             */
+/*   Updated: 2017/11/17 14:16:39 by emoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
-# define BUFF_SIZE 600
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "libft/libft.h"
+#include "libft.h"
 
-typedef struct			s_tab
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char				tab[4][4];
-	struct s_tab		*next;
-}						t_tab;
+	int		i;
+	int		n;
+	char	*new;
 
-char					*ft_read(char **argv);
-
-#endif
+	i = -1;
+	n = 0;
+	if (s1 == 0 || s2 == 0)
+		return (NULL);
+	if (!(new = (char *)malloc(sizeof(char) * (ft_strlen(s1)
+											+ ft_strlen(s2) + 1))))
+		return (NULL);
+	while (s1[++i])
+	{
+		new[n] = s1[i];
+		n++;
+	}
+	i = 0;
+	while (s2[i])
+	{
+		new[n] = s2[i];
+		n++;
+		i++;
+	}
+	new[n] = '\0';
+	return (new);
+}

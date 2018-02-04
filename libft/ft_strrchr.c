@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 16:33:57 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/04 21:53:48 by emoreau          ###   ########.fr       */
+/*   Created: 2017/11/11 18:14:57 by emoreau           #+#    #+#             */
+/*   Updated: 2017/11/14 18:26:53 by emoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
-# define BUFF_SIZE 600
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "libft/libft.h"
+#include "libft.h"
 
-typedef struct			s_tab
+char	*ft_strrchr(const char *s, int c)
 {
-	char				tab[4][4];
-	struct s_tab		*next;
-}						t_tab;
+	int len_s;
 
-char					*ft_read(char **argv);
-
-#endif
+	len_s = ft_strlen(s);
+	while ((len_s >= 0) && (s[len_s] != (char)c))
+		len_s--;
+	if (s[len_s] == c)
+		return ((char *)&s[len_s]);
+	else
+		return (NULL);
+}

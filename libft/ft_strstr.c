@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 16:33:57 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/04 21:53:48 by emoreau          ###   ########.fr       */
+/*   Created: 2017/11/10 16:26:55 by emoreau           #+#    #+#             */
+/*   Updated: 2017/11/19 17:46:19 by emoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
-# define BUFF_SIZE 600
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "libft/libft.h"
+#include "libft.h"
 
-typedef struct			s_tab
+char	*ft_strstr(const char *str, const char *find)
 {
-	char				tab[4][4];
-	struct s_tab		*next;
-}						t_tab;
+	int		i;
+	int		n;
+	int		p;
+	char	*s;
 
-char					*ft_read(char **argv);
-
-#endif
+	i = 0;
+	p = 0;
+	s = (char *)str;
+	if (!(find[i]))
+		return (s);
+	while (s[i])
+	{
+		n = 0;
+		p = i;
+		while (s[p] == find[n])
+		{
+			n++;
+			p++;
+			if (!(find[n]))
+				return (&s[i]);
+		}
+		i++;
+	}
+	return (NULL);
+}

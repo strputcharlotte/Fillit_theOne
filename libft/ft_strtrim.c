@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/29 16:33:57 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/04 21:53:48 by emoreau          ###   ########.fr       */
+/*   Created: 2017/11/15 18:14:31 by emoreau           #+#    #+#             */
+/*   Updated: 2017/11/22 16:03:56 by emoreau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
-# define BUFF_SIZE 600
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "libft/libft.h"
+#include "libft.h"
 
-typedef struct			s_tab
+char	*ft_strtrim(char const *s)
 {
-	char				tab[4][4];
-	struct s_tab		*next;
-}						t_tab;
+	unsigned int	i;
+	int				end;
+	int				n;
 
-char					*ft_read(char **argv);
-
-#endif
+	i = 0;
+	n = 0;
+	if (s)
+	{
+		while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
+			i++;
+		if (i == ft_strlen(s))
+			return (ft_strdup("\0"));
+		end = ft_strlen(s) - 1;
+		while (s[end] == ' ' || s[end] == '\n' || s[end] == '\t')
+			end--;
+		return (ft_strsub(s, i, (end - i + 1)));
+	}
+	return (NULL);
+}
