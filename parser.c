@@ -6,7 +6,7 @@
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 16:36:56 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/04 21:53:47 by emoreau          ###   ########.fr       */
+/*   Updated: 2018/02/04 23:30:58 by cfarjane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
  au solver. Le solver recoit donc un premier tetro, puis un deuxieme, etc.
 */
 
+#include "includes.h"
+
 int			error(char **tab)
 {
 	int x;
@@ -27,22 +29,22 @@ int			error(char **tab)
 	y = 0;
 	while (**tab)
 	{
-		while (tab[y][x] == "." || tab[y][x] == "#")
-		{
+//		while (tab[y][x] == "." || tab[y][x] == "#") -> ne compile pas
+		while (ft_strcmp(&tab[y][x], ".") || ft_strcmp(&tab[y][x], "#"))
 			x++;
-			if (tab[y][4] == '\n')
-			{
+// tout ca sort du while sinon on ne rentre jamais dedans
+		if (tab[y][4] == '\n')
+		{
+			y++;
+			x = 0;
+			if (tab[y][x] == '\n')
 				y++;
-				x = 0;
-				if (tab[y][x] == '\n')
-					y++;
-			}
-			else
-				return (-1);
-			if (y > 129)
-				return (-1);
 		}
-		return (-1);
+		else
+			return (-1);
+		if (y > 129)
+			return (-1);
+//		return (-1); a supprimer
 	}
 	return (0);
 }
@@ -54,7 +56,7 @@ int		comptchar(char **tab)
 	int x;
 	int y;
 
-	compt_diese = 0
+	compt_diese = 0;
 	compt_point = 0;
 	x = 0;
 	y = 0;
