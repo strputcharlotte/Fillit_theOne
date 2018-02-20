@@ -6,16 +6,19 @@
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 16:36:56 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/05 19:48:21 by emoreau          ###   ########.fr       */
+/*   Updated: 2018/02/20 18:06:04 by cfarjane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
- chaque # doit etre en contact avec un autre #
  une fois qu'on a verifié que le fichier est bon, on transforme les tetri en lettres
  puis on nettoie, ie on enleve les points en trop
  ensuite le parser extrait les tetros un par un et les envoie sous la forme d'un double tableau
  au solver. Le solver recoit donc un premier tetro, puis un deuxieme, etc.
+*/
+
+/*
+ *segfault dans separe tetro, boucle while (tab[y] != '\n')
 */
 
 #include "includes.h"
@@ -27,21 +30,23 @@ int			error(char **tab)
 
 	x = 0;
 	y = 0;
-	while (**tab)
+	if (tab)
 	{
-		while (ft_strcmp(&tab[y][x], ".") || ft_strcmp(&tab[y][x], "#"))
-			x++;
-		if (tab[y][4] == '\n')
+		while (tab[y][x] == '.' || tab[y][x] == '#')
 		{
-			y++;
-			x = 0;
-			if (tab[y][x] == '\n')
+			x++;
+			if (tab[y][4] == '\n')
+			{
 				y++;
+				x = 0;
+				if (tab[y][x] == '\n')
+					y++;
+			}
+			else
+				return (-1);
+			if (y > 129)
+				return (-1);
 		}
-		else
-			return (-1);
-		if (y > 129)
-			return (-1);
 	}
 	return (0);
 }
@@ -91,14 +96,14 @@ t_tab		*separe_tetro(char **tab)
 	j = 0;
 	y = 0;
 	cpt = 0;
-	if (!(new_tetro->tab = (t_tab**)malloc(sizeof(t_tab*) * 4)))
+	if (!(new_tetro = (t_tab*)malloc(sizeof(t_tab) * 4)))
 		return(NULL);
 	while (tab)
 	{
 		while (*tab[y] != '\n' && j < 4)
 		{
-			if (!(new_tetro->tab[j] = (t_tab*)malloc(sizeof(t_tab) * 5)))
-				return(NULL);
+//			if (!(new_tetro->tab[j] = (t_tab**)malloc(sizeof(t_tab*) * 5)))
+//				return(NULL);
 			ft_strncpy(new_tetro->tab[j], tab[y], 4);
 			y++;
 			j++;
@@ -112,7 +117,7 @@ t_tab		*separe_tetro(char **tab)
 			y++;
 		j = 0;
 		if (cpt > 26 || cpt == 0)
-			return (-1);
+			return (NULL);
 	}
 	return (new_tetro);
 }
@@ -141,6 +146,7 @@ int		side_to_side(char **tab)
 		else
 			return (-1);
 	}
+	return (0);
 }
 
 char	*ft_convletter(char *str)

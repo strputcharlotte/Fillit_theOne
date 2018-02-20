@@ -6,13 +6,12 @@
 #    By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/29 16:32:57 by emoreau           #+#    #+#              #
-#    Updated: 2018/01/29 16:33:12 by emoreau          ###   ########.fr        #
+#    Updated: 2018/02/20 15:52:03 by cfarjane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 	= fillit
-SRC 	= call_fonctions.c main.c parser.c prealgo.c read.c\
-		  solver.c solver_2.c conv_letter.c
+SRC 	= main.c parser.c read.c
 FLAGS 	= -Werror -Wall -Wextra -g
 CC 		= gcc
 
