@@ -6,7 +6,7 @@
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 16:36:56 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/20 18:06:04 by cfarjane         ###   ########.fr       */
+/*   Updated: 2018/02/22 15:54:06 by cfarjane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		comptchar(char **tab)
 	x = 0;
 	y = 0;
 
-	while (**tab)
+	while (tab)
 	{
 		if (tab[y][x] == '#')
 			compt_diese++;
@@ -90,31 +90,28 @@ t_tab		*separe_tetro(char **tab)
 {
 	int		j;
 	int		y;
+	int		x;
 	int 	cpt;
 	t_tab	*new_tetro;
 
 	j = 0;
+	x = 0;
 	y = 0;
 	cpt = 0;
-	if (!(new_tetro = (t_tab*)malloc(sizeof(t_tab) * 4)))
+	if (!(new_tetro = (t_tab*)malloc(sizeof(t_tab))))
 		return(NULL);
 	while (tab)
 	{
-		while (*tab[y] != '\n' && j < 4)
+		while (tab[y][x] != '\n' && tab[y+1][0] != '\n')
 		{
-//			if (!(new_tetro->tab[j] = (t_tab**)malloc(sizeof(t_tab*) * 5)))
-//				return(NULL);
-			ft_strncpy(new_tetro->tab[j], tab[y], 4);
-			y++;
+			ft_strncpy(new_tetro->tetro[j], tab[y], 4);
+			y += 3;
+			x += 4;
 			j++;
 		}
 		if (j != 0)
-		{
 			cpt++;
-			new_tetro = new_tetro->next;
-		}
-		else
-			y++;
+		y += 2;
 		j = 0;
 		if (cpt > 26 || cpt == 0)
 			return (NULL);

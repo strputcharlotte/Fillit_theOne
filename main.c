@@ -6,7 +6,7 @@
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 19:50:35 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/20 17:44:50 by cfarjane         ###   ########.fr       */
+/*   Updated: 2018/02/22 15:48:13 by cfarjane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@ void		ft_print_map(char **map)
 	int i;
 
 	i = 0;
-	while (map)
+	while (map[i])
 	{
+		printf("test map\n");
 		ft_putstr(map[i]);
 		write(1, "\n",1);
 		i++;
 	}
 }
 
-char		**call_fonctions(char **argv)
+char		**call_functions(char **argv)
 {
 	char	c;
 	int		cnt;
@@ -39,7 +40,7 @@ char		**call_fonctions(char **argv)
 	{
 		if (error(argv) == -1)
 			return (NULL);
-		while (argv)
+		while (argv[1])
 		{
 			tetri = (char**)separe_tetro(argv);
 			comptchar(tetri);
@@ -67,8 +68,11 @@ int				main(int argc, char **argv)
 		return (1);
 	}
 	str = ft_read(argv, 4);
-	test = call_fonctions((char**)str);
+	printf("test 1\n");
+	test = call_functions((char**)str);
+	printf("test 2\n");
 	ft_print_map(test);
+	printf("%s\n", argv[1]);
 //	ft_print_map(ft_solver (tab, 0, str));
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/29 16:32:57 by emoreau           #+#    #+#              #
-#    Updated: 2018/02/20 15:52:03 by cfarjane         ###   ########.fr        #
+#    Updated: 2018/02/22 14:18:34 by cfarjane         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,10 +35,10 @@ $(NAME): $(OBJ)
 
 clean:
 	@rm -f $(OBJ)
-	@echo "$(RED)[-]$(NC)$(CL2) Objects of $(NAME) cleaned"
+	@echo "$(RED)[-]$(NC)$(CL2) Objects of $(NAME) cleaned$(NC)"
 
 fclean: clean
 	@rm -rf fillit
-	@echo "$(RED)[-]$(NC)$(CL2) Library $(NAME) cleaned"
+	@echo "$(RED)[-]$(NC)$(CL2) Library $(NAME) cleaned$(NC)"
 
 re: fclean all
