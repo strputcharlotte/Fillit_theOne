@@ -6,7 +6,7 @@
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 19:50:35 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/22 15:48:13 by cfarjane         ###   ########.fr       */
+/*   Updated: 2018/02/25 20:31:39 by cfarjane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char		**call_functions(char **argv)
 	char	c;
 	int		cnt;
 	char	**tetri;
+	char	*str;
 
 	c = 'A';
 	cnt = 4;
@@ -40,13 +41,15 @@ char		**call_functions(char **argv)
 	{
 		if (error(argv) == -1)
 			return (NULL);
-		while (argv[1])
+		while (argv)
 		{
 			tetri = (char**)separe_tetro(argv);
 			comptchar(tetri);
 		}
-		side_to_side(tetri);
-		ft_convletter(*tetri);
+		str = NULL;
+		ft_strcpy(str, *tetri);
+		check_piece(str);
+		ft_convletter(str);
 		ft_print_map(tetri);
 		c++;
 		cnt--;

@@ -6,19 +6,20 @@
 /*   By: emoreau <emoreau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 16:36:56 by emoreau           #+#    #+#             */
-/*   Updated: 2018/02/22 15:54:06 by cfarjane         ###   ########.fr       */
+/*   Updated: 2018/02/25 20:31:36 by cfarjane         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
- une fois qu'on a verifié que le fichier est bon, on transforme les tetri en lettres
- puis on nettoie, ie on enleve les points en trop
- ensuite le parser extrait les tetros un par un et les envoie sous la forme d'un double tableau
- au solver. Le solver recoit donc un premier tetro, puis un deuxieme, etc.
-*/
+   une fois qu'on a verifié que le fichier est bon, on transforme les tetri en lettres
+   puis on nettoie, ie on enleve les points en trop
+   ensuite le parser extrait les tetros un par un et les envoie sous la forme d'un double tableau
+   au solver. Le solver recoit donc un premier tetro, puis un deuxieme, etc.
+   */
 
 /*
- *segfault dans separe tetro, boucle while (tab[y] != '\n')
+ * verifier que tous les # sont a cote, double tableau devient une seule chaine de caracteres,
+ * strjoin
 */
 
 #include "includes.h"
@@ -102,21 +103,62 @@ t_tab		*separe_tetro(char **tab)
 		return(NULL);
 	while (tab)
 	{
-		while (tab[y][x] != '\n' && tab[y+1][0] != '\n')
+		while (tab && tab[y][x] != '\n' && tab[y+1][x] != '\n')
 		{
-			ft_strncpy(new_tetro->tetro[j], tab[y], 4);
-			y += 3;
-			x += 4;
+			ft_strcpy(new_tetro->tetro[j], tab[y]);
+			y++;
+			x++;
 			j++;
 		}
 		if (j != 0)
 			cpt++;
 		y += 2;
+		x = 0;
 		j = 0;
 		if (cpt > 26 || cpt == 0)
 			return (NULL);
 	}
 	return (new_tetro);
+}
+
+int		check_onepiece(char *str, int i, int calc_diez, int local_i)
+{
+	if (str[i - 1] == '#' && local_i - 1 >= 0)
+		calc_diez++;
+	if (str[i + 1] == '#' && local_i + 1 < 21)
+		calc_diez++;
+	if (str[i - 5] == '#' && local_i - 5 >= 0)
+		calc_diez++;
+	if (str[i + 5] == '#' && local_i + 5 < 21)
+		calc_diez++;
+	return (calc_diez);
+}
+
+int		check_piece(char *str)
+{
+	int i;
+	int local_i;
+	int calc_diez;
+
+	calc_diez = 0;
+	i = 0;
+	while (str[i])
+	{
+		local_i = 0;
+		while (local_i != 21)
+		{
+			if (str[i] == '#')
+				calc_diez = check_onepiece(str, i, calc_diez, local_i);
+			local_i++;
+			i++;
+		}
+		if (calc_diez != 6 && calc_diez != 8)
+			return (0);
+		calc_diez = 0;
+		if (str[i - 1] == '\0')
+			i--;
+	}
+	return (1);
 }
 
 int		side_to_side(char **tab)
